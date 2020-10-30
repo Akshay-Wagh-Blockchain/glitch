@@ -1,0 +1,33 @@
+# /etc/conf.d/glitchd: config file for /etc/init.d/glitchd
+
+# Config file location
+#GLITCHD_CONFIGFILE="/etc/glitch/glitch.conf"
+
+# What directory to write pidfile to?  (created and owned by $GLITCHD_USER)
+#GLITCHD_PIDDIR="/var/run/glitchd"
+
+# What filename to give the pidfile
+#GLITCHD_PIDFILE="${GLITCHD_PIDDIR}/glitchd.pid"
+
+# Where to write glitchd data (be mindful that the blockchain is large)
+#GLITCHD_DATADIR="/var/lib/glitchd"
+
+# User and group to own glitchd process
+#GLITCHD_USER="glitch"
+#GLITCHD_GROUP="glitch"
+
+# Path to glitchd executable
+#GLITCHD_BIN="/usr/bin/glitchd"
+
+# Nice value to run glitchd under
+#GLITCHD_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+#GLITCHD_OPTS=""
+
+# The timeout in seconds OpenRC will wait for glitchd to terminate
+# after a SIGTERM has been raised.
+# Note that this will be mapped as argument to start-stop-daemon's
+# '--retry' option, which means you can specify a retry schedule
+# here. For more information see man 8 start-stop-daemon.
+GLITCHD_SIGTERM_TIMEOUT=60

@@ -1,0 +1,6 @@
+usr/local/bin/glitch-qt usr/bin
+share/pixmaps/glitch32.xpm usr/share/pixmaps
+share/pixmaps/glitch16.xpm usr/share/pixmaps
+share/pixmaps/glitch128.png usr/share/pixmaps
+debian/glitch-qt.desktop usr/share/applications
+debian/glitch-qt.protocol usr/share/kde4/services/

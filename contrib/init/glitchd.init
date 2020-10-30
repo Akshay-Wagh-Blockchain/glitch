@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+#
+#  glitchd The glitch core server.
+#
+#
+# chkconfig: 345 80 20
+# description: glitchd
+# processname: glitchd
+#
+
+# Source function library.
+. /etc/init.d/functions
+
+# you can override defaults in /etc/sysconfig/glitchd, see below
+if [ -f /etc/sysconfig/glitchd ]; then
+        . /etc/sysconfig/glitchd
+fi
+
+RETVAL=0
+
+prog=glitchd
+# you can override the lockfile via GLITCHD_LOCKFILE in /etc/sysconfig/glitchd
+lockfile=${GLITCHD_LOCKFILE-/var/lock/subsys/glitchd}
+
+# glitchd defaults to /usr/bin/glitchd, override with GLITCHD_BIN
+glitchd=${GLITCHD_BIN-/usr/bin/glitchd}
+
+# glitchd opts default to -disablewallet, override with GLITCHD_OPTS
+glitchd_opts=${GLITCHD_OPTS--disablewallet}
+
+start() {
+    echo -n $"Starting $prog: "
+    daemon $DAEMONOPTS $glitchd $glitchd_opts
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch $lockfile
+    return $RETVAL
+}
+
+stop() {
+    echo -n $"Stopping $prog: "
+    killproc $prog
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && rm -f $lockfile
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        start
+        ;;
+    stop)
+        stop
+        ;;
+    status)
+        status $prog
+        ;;
+    restart)
+        stop
+        start
+        ;;
+    *)
+        echo "Usage: service $prog {start|stop|status|restart}"
+        exit 1
+        ;;
+esac
